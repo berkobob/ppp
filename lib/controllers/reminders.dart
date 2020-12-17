@@ -1,13 +1,14 @@
 import 'package:flutter/services.dart';
 
-class Reminders {
+import 'controller.dart';
+
+class Reminders extends Controller {
   static const _channel = const MethodChannel('family.lever.ppp/reminders');
 
-  Future<bool> get hasAccess async {
-    final r = await _channel.invokeMethod('hasAccess');
-    final l = await _channel.invokeMethod('defaultList');
-    print(r);
-    print(l);
-    return r;
+  Future hasAccess() async {
+    updateStatus(ServiceStatus.busy);
+    final result = await _channel.invokeMethod('hasAccess');
+    print('Result: $result');
+    updateStatus(result ? ServiceStatus.access : ServiceStatus.denied);
   }
 }
