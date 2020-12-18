@@ -1,6 +1,6 @@
 import EventKit
 
-class Reminders {
+class AppleReminders {
     let eventStore: EKEventStore = EKEventStore()
     let defaultList: EKCalendar?
     var hasAccess: Bool = false
@@ -34,8 +34,8 @@ class Reminders {
                 completion(rems.map { ["title": $0.title ?? "",
                                        "isCompleted": $0.isCompleted,
                                        "priority": $0.priority,
-                                       "dueDate": Reminders.dateToString($0.dueDateComponents),
-                                       "startDate": Reminders.dateToString($0.startDateComponents),
+                                       "dueDate": AppleReminders.dateToString($0.dueDateComponents),
+                                       "startDate": AppleReminders.dateToString($0.startDateComponents),
                                        "completionDate": $0.completionDate?.description ?? "",
                                        "id": $0.calendarItemIdentifier,
                                        "notes": $0.notes ?? ""

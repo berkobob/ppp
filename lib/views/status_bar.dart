@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ppp/controllers/OneNotes.dart';
+import 'package:ppp/controllers/base.dart';
 import 'package:ppp/controllers/controller.dart';
-import 'package:ppp/controllers/reminders.dart';
-import 'package:ppp/controllers/tasks.dart';
 import 'package:provider/provider.dart';
 
 class StatusBar extends StatelessWidget {
+  final statusColors = {
+    ServiceStatus.access: Colors.green,
+    ServiceStatus.denied: Colors.red,
+    ServiceStatus.busy: Colors.yellow,
+    ServiceStatus.idle: Colors.black
+  };
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,9 +25,7 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: context.watch<Reminders>().status == ServiceStatus.access
-                ? Colors.green
-                : Colors.red,
+            color: statusColors[context.watch<Controller>().reminders.status],
           ),
         ),
         Expanded(
@@ -35,9 +38,7 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: context.watch<Tasks>().status == ServiceStatus.access
-                ? Colors.green
-                : Colors.red,
+            color: statusColors[context.watch<Controller>().tasks.status],
           ),
         ),
         Expanded(
@@ -50,9 +51,7 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: context.watch<OneNotes>().status == ServiceStatus.access
-                ? Colors.green
-                : Colors.red,
+            color: statusColors[context.watch<Controller>().oneNotes.status],
           ),
         ),
       ],

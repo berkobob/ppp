@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppp/controllers/OneNotes.dart';
-import 'package:ppp/controllers/reminders.dart';
-import 'package:ppp/controllers/tasks.dart';
+import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
 
 import 'status_bar.dart';
@@ -14,12 +12,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('PPP'),
       ),
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => Reminders()),
-          ChangeNotifierProvider(create: (_) => Tasks()),
-          ChangeNotifierProvider(create: (_) => OneNotes()),
-        ],
+      body: ChangeNotifierProvider<Controller>(
+        create: (_) => Controller(),
         child: Column(
           children: [
             StatusBar(),

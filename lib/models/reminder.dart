@@ -23,4 +23,9 @@ class Reminder {
     this.startDate = json['startDate'];
     this.completionDate = json['completionDate'];
   }
+
+  @override
+  String toString() {
+    return this.title;
+  }
 }

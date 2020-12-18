@@ -1,6 +1,6 @@
-import 'controller.dart';
+import 'base.dart';
 
-class OneNotes extends Controller {
+class OneNotes extends Base {
   Future hasAccess() async {
     updateStatus(ServiceStatus.busy);
     await Future.delayed(Duration(seconds: 2));

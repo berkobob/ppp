@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
-enum ServiceStatus { idle, busy, access, denied }
+import 'reminders.dart';
+import 'tasks.dart';
+import 'oneNotes.dart';
 
-abstract class Controller extends ChangeNotifier {
-  ServiceStatus status = ServiceStatus.idle;
+class Controller extends ChangeNotifier {
+  List<dynamic> items = [];
 
-  Future hasAccess();
+  Reminders reminders = Reminders();
+  OneNotes oneNotes = OneNotes();
+  Tasks tasks = Tasks();
 
   Controller() {
-    hasAccess();
-  }
+    reminders.notifyListeners = notifyListeners;
+    tasks.notifyListeners = notifyListeners;
+    oneNotes.notifyListeners = notifyListeners;
 
-  void updateStatus(ServiceStatus status) {
-    this.status = status;
-    notifyListeners();
+    reminders.hasAccess();
+    tasks.hasAccess();
+    oneNotes.hasAccess();
   }
 
   @override
-  String toString() {
-    return status.toString();
-  }
+  String toString() =>
+      "Reminders: ${reminders.status}\nOneNotes: ${oneNotes.status}\nTasks: ${tasks.status}";
 }
