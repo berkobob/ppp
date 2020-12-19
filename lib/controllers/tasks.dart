@@ -6,4 +6,6 @@ class Tasks extends Base {
     await Future.delayed(Duration(seconds: 5));
     updateStatus(ServiceStatus.access);
   }
+
+  Future<List<dynamic>> getItems(String list) async {}
 }

@@ -6,4 +6,6 @@ class OneNotes extends Base {
     await Future.delayed(Duration(seconds: 2));
     updateStatus(ServiceStatus.access);
   }
+
+  Future<List<dynamic>> getItems(String list) async {}
 }

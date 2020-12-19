@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppp/models/reminder.dart';
 
 import 'reminders.dart';
 import 'tasks.dart';
@@ -7,21 +8,22 @@ import 'oneNotes.dart';
 class Controller extends ChangeNotifier {
   List<dynamic> items = [];
 
-  Reminders reminders = Reminders();
-  OneNotes oneNotes = OneNotes();
-  Tasks tasks = Tasks();
+  final sources = {
+    "Reminders": Reminders(),
+    "Taks": Tasks(),
+    "OneNotes": OneNotes()
+  };
 
   Controller() {
-    reminders.notifyListeners = notifyListeners;
-    tasks.notifyListeners = notifyListeners;
-    oneNotes.notifyListeners = notifyListeners;
-
-    reminders.hasAccess();
-    tasks.hasAccess();
-    oneNotes.hasAccess();
+    sources.forEach((_, value) => value.notifyListeners = notifyListeners);
+    sources.forEach((_, value) => value.hasAccess());
   }
 
-  @override
-  String toString() =>
-      "Reminders: ${reminders.status}\nOneNotes: ${oneNotes.status}\nTasks: ${tasks.status}";
+  Future<List<Reminder>> getItems() async {
+    return await sources['Reminders'].getItems("");
+  }
+
+  // @override
+  // String toString() =>
+  //     "Reminders: ${reminders.status}\nOneNotes: ${oneNotes.status}\nTasks: ${tasks.status}";
 }

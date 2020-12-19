@@ -21,7 +21,7 @@ class Reminders extends Base {
     return await _channel.invokeMethod("lists");
   }
 
-  Future<List<Reminder>> getReminders(String list) async {
+  Future<List<Reminder>> getItems(String list) async {
     var reminders =
         await _channel.invokeMethod("getReminders", {"calendar": list});
     return reminders

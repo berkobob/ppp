@@ -25,7 +25,8 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: statusColors[context.watch<Controller>().reminders.status],
+            // color: statusColors[
+            //     context.watch<Controller>().sources['Reminders'].status],
           ),
         ),
         Expanded(
@@ -38,7 +39,8 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: statusColors[context.watch<Controller>().tasks.status],
+            // color: statusColors[
+            //     context.watch<Controller>().sources['Tasks'].status],
           ),
         ),
         Expanded(
@@ -51,7 +53,8 @@ class StatusBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            color: statusColors[context.watch<Controller>().oneNotes.status],
+            // color: statusColors[
+            //     context.watch<Controller>().sources['OneNotes'].status],
           ),
         ),
       ],

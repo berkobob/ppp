@@ -5,6 +5,8 @@ abstract class Base {
   Future hasAccess();
   Function notifyListeners;
 
+  Future<List<dynamic>> getItems(String list);
+
   updateStatus(ServiceStatus status) {
     print(
         '${this.runtimeType.toString()} is changing status from ${this.status} to $status');
