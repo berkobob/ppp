@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ppp/controllers/base.dart';
 import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
 
@@ -7,12 +6,12 @@ class StatusTile extends StatelessWidget {
   final String source;
   StatusTile(this.source);
 
-  final statusColors = {
-    ServiceStatus.access: Colors.green,
-    ServiceStatus.denied: Colors.red,
-    ServiceStatus.busy: Colors.yellow,
-    ServiceStatus.idle: Colors.blue
-  };
+  final statusColors = [
+    Colors.blue, // idle
+    Colors.yellow, // busy
+    Colors.green, // access
+    Colors.red, // denied
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,8 @@ class StatusTile extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        color: statusColors[context.watch<Controller>().sources[source].status],
+        color: statusColors[
+            context.watch<Controller>().sources[source].status.index],
       ),
     );
   }

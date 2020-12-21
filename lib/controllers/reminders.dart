@@ -7,10 +7,10 @@ class Reminders extends Base {
   static const _channel = const MethodChannel('family.lever.ppp/reminders');
 
   Future hasAccess() async {
-    updateStatus(ServiceStatus.busy);
+    updateStatus(Service.busy);
     final result = await _channel.invokeMethod('hasAccess');
-    items = await _getItems("");
-    updateStatus(result ? ServiceStatus.access : ServiceStatus.denied);
+    items = await getItems("");
+    updateStatus(result ? Service.access : Service.denied);
   }
 
   Future<String> get defaultList async {
@@ -22,12 +22,12 @@ class Reminders extends Base {
     return await _channel.invokeMethod("lists");
   }
 
-  Future<List<Reminder>> _getItems(String list) async {
-    if (status != ServiceStatus.busy) updateStatus(ServiceStatus.busy);
+  Future<List<Reminder>> getItems(String list) async {
+    if (status != Service.busy) updateStatus(Service.busy);
 
     final reminders =
         await _channel.invokeMethod("getReminders", {"calendar": list});
-    updateStatus(ServiceStatus.idle);
+    updateStatus(Service.idle);
     return reminders
         .map<Reminder>((reminder) => Reminder.fromJson(reminder))
         .toList();

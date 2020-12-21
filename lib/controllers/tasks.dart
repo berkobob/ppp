@@ -4,13 +4,13 @@ import 'base.dart';
 
 class Tasks extends Base {
   Future hasAccess() async {
-    updateStatus(ServiceStatus.busy);
+    updateStatus(Service.busy);
     await Future.delayed(Duration(seconds: 5));
     items = [Item(source: Source.tasks, title: "I'm a reminder", id: '123')];
-    updateStatus(ServiceStatus.access);
+    updateStatus(Service.access);
   }
 
-  Future<List<dynamic>> getItems(String list) async {
+  Future<List<Item>> getItems(String list) async {
     return null;
   }
 }
