@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
-import 'package:ppp/models/reminder.dart';
+import 'package:ppp/models/item.dart';
 import 'package:provider/provider.dart';
 
 class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Reminder>>(
-        future: Provider.of<Controller>(context).getItems(),
+    return FutureBuilder<List<Item>>(
+        future: Provider.of<Controller>(context, listen: false).getItems(),
+        // future: context.watch<Controller>().getItems(),
         builder: (context, snapshot) {
           if (snapshot.hasData)
             return Wrap(
@@ -15,7 +16,7 @@ class Items extends StatelessWidget {
                 children: snapshot.data
                     .map((item) => Chip(label: Text(item.title)))
                     .toList());
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         });
   }
 }

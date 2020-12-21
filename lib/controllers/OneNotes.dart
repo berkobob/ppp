@@ -7,5 +7,7 @@ class OneNotes extends Base {
     updateStatus(ServiceStatus.access);
   }
 
-  Future<List<dynamic>> getItems(String list) async {}
+  Future<List<dynamic>> getItems(String list) async {
+    return null;
+  }
 }

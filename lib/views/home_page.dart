@@ -17,22 +17,16 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Builder(
-                builder: (context) => Row(
-                    children: Provider.of<Controller>(context, listen: false)
-                        .sources
-                        .keys
-                        .map((source) => StatusTile(source))
-                        .toList())
-
-                // final sources =
-                //     Provider.of<Controller>(context, listen: false).sources;
-                // List<Widget> status = [];
-                // sources.forEach((name, source) =>
-                //     status.add(StatusTile(name: name, source: source)));
-                // return Row(children: status);
-                ),
-            // StatusBar(),
-            Expanded(child: Items()),
+              builder: (context) => Row(
+                  children: Provider.of<Controller>(context, listen: false)
+                      .sources
+                      .keys
+                      .map((source) => StatusTile(source))
+                      .toList()),
+            ),
+            Expanded(
+              child: Items(),
+            ),
           ],
         ),
       ),

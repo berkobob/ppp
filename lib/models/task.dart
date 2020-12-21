@@ -8,7 +8,6 @@ class Task {
   bool hasNotes = false;
 
   Task(Map<String, dynamic> json) {
-    print(json);
     id = json['id'];
     title = json['title'];
     due = json['due'];

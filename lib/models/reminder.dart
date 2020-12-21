@@ -1,8 +1,8 @@
+import 'item.dart';
+
 /// The Reminder class represents an ios Reminder
 /// A reminder can be generated using a standard constructor or from JSON
-class Reminder {
-  String id;
-  String title;
+class Reminder extends Item {
   int priority;
   bool isCompleted;
   String notes = "";
@@ -10,22 +10,17 @@ class Reminder {
   String startDate = "";
   String completionDate = "";
 
-  Reminder(this.id, this.title, this.priority, this.isCompleted,
-      [this.notes = "", this.dueDate, this.startDate, this.completionDate]);
+  Reminder(id, title, this.priority, this.isCompleted,
+      [this.notes = "", this.dueDate, this.startDate, this.completionDate])
+      : super(source: Source.reminders, id: id, title: title);
 
-  Reminder.fromJson(json) {
-    this.id = json['id'];
-    this.title = json['title'];
+  Reminder.fromJson(json)
+      : super(source: Source.reminders, id: json['id'], title: json['title']) {
     this.priority = json['priority'];
     this.isCompleted = json['isCompleted'] as bool;
     this.notes = json['notes'];
     this.dueDate = json['dueDate'];
     this.startDate = json['startDate'];
     this.completionDate = json['completionDate'];
-  }
-
-  @override
-  String toString() {
-    return this.title;
   }
 }

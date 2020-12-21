@@ -1,15 +1,15 @@
+import 'package:ppp/models/item.dart';
+
 enum ServiceStatus { idle, busy, access, denied }
 
 abstract class Base {
   ServiceStatus status = ServiceStatus.idle;
   Future hasAccess();
   Function notifyListeners;
-
-  Future<List<dynamic>> getItems(String list);
+  List<Item> items;
+  bool get isReady => status == ServiceStatus.access;
 
   updateStatus(ServiceStatus status) {
-    print(
-        '${this.runtimeType.toString()} is changing status from ${this.status} to $status');
     this.status = status;
     notifyListeners();
   }

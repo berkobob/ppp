@@ -11,7 +11,7 @@ class StatusTile extends StatelessWidget {
     ServiceStatus.access: Colors.green,
     ServiceStatus.denied: Colors.red,
     ServiceStatus.busy: Colors.yellow,
-    ServiceStatus.idle: Colors.black
+    ServiceStatus.idle: Colors.blue
   };
 
   @override

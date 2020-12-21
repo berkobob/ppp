@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/base.dart';
-import 'package:ppp/controllers/controller.dart';
-import 'package:provider/provider.dart';
 
 class StatusBar extends StatelessWidget {
   final statusColors = {
