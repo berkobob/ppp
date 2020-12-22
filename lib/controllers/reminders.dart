@@ -9,8 +9,8 @@ class Reminders extends Base {
   Future hasAccess() async {
     updateStatus(Service.busy);
     final result = await _channel.invokeMethod('hasAccess');
-    items = await getItems("");
     updateStatus(result ? Service.access : Service.denied);
+    await getItems("");
   }
 
   Future<String> get defaultList async {
@@ -22,15 +22,21 @@ class Reminders extends Base {
     return await _channel.invokeMethod("lists");
   }
 
-  Future<List<Reminder>> getItems(String list) async {
-    if (status != Service.busy) updateStatus(Service.busy);
+  Future getItems([String list]) async {
+    if (status != Service.access) return;
+    updateStatus(Service.busy);
 
-    final reminders =
-        await _channel.invokeMethod("getReminders", {"calendar": list});
-    updateStatus(Service.idle);
-    return reminders
-        .map<Reminder>((reminder) => Reminder.fromJson(reminder))
-        .toList();
+    try {
+      final reminders =
+          await _channel.invokeMethod("getReminders", {"calendar": list});
+      items = reminders
+          .map<Reminder>((reminder) => Reminder.fromJson(reminder))
+          .toList();
+      updateStatus(Service.idle);
+    } catch (error) {
+      print(error);
+      updateStatus(Service.denied);
+    }
   }
 
   Future deleteReminderWithId(String reminder) async {

@@ -1,16 +1,24 @@
 import 'package:ppp/models/item.dart';
+import 'package:ppp/services/google.dart';
 
 import 'base.dart';
 
 class Tasks extends Base {
+  Google google = Google();
+
   Future hasAccess() async {
     updateStatus(Service.busy);
-    await Future.delayed(Duration(seconds: 5));
-    items = [Item(source: Source.tasks, title: "I'm a reminder", id: '123')];
-    updateStatus(Service.access);
+    await getItems();
+    updateStatus(items.isEmpty ? Service.denied : Service.access);
   }
 
-  Future<List<Item>> getItems(String list) async {
-    return null;
+  Future getItems([String list]) async {
+    updateStatus(Service.busy);
+    final lists = await google.getLists();
+    if (lists != null) {
+      final list = lists.firstWhere((list) => list.title == 'My Tasks');
+      items = (await google.getTasks(taskList: list)).cast<Item>();
+    }
+    updateStatus(Service.idle);
   }
 }

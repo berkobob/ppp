@@ -12,7 +12,7 @@ abstract class Base {
   Future hasAccess();
   Function notifyListeners;
   List<Item> items;
-  Future<List<Item>> getItems(String list);
+  Future getItems([String list]);
 
   updateStatus(Service status) {
     this.status = status;
