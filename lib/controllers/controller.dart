@@ -8,7 +8,7 @@ import 'oneNotes.dart';
 class Controller extends ChangeNotifier {
   final sources = {
     "Reminders": Reminders(),
-    "Taks": Tasks(),
+    "Tasks": Tasks(),
     "OneNotes": OneNotes()
   };
 
@@ -20,6 +20,8 @@ class Controller extends ChangeNotifier {
     });
     return _items;
   }
+
+  refresh() => sources.forEach((key, source) => source.getItems(""));
 
   Controller() {
     sources.forEach((_, value) => value.notifyListeners = notifyListeners);

@@ -25,14 +25,13 @@ class Reminders extends Base {
   Future getItems([String list]) async {
     if (status != Service.access) return;
     updateStatus(Service.busy);
-
     try {
       final reminders =
           await _channel.invokeMethod("getReminders", {"calendar": list});
       items = reminders
           .map<Reminder>((reminder) => Reminder.fromJson(reminder))
           .toList();
-      updateStatus(Service.idle);
+      updateStatus(Service.access);
     } catch (error) {
       print(error);
       updateStatus(Service.denied);

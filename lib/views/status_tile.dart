@@ -7,9 +7,9 @@ class StatusTile extends StatelessWidget {
   StatusTile(this.source);
 
   final statusColors = [
-    Colors.blue, // idle
+    Colors.green, // idle
     Colors.yellow, // busy
-    Colors.green, // access
+    Colors.blue, // access
     Colors.red, // denied
   ];
 

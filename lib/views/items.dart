@@ -5,13 +5,17 @@ import 'package:provider/provider.dart';
 class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 20.0,
-      children: context
-          .watch<Controller>()
-          .items
-          .map((item) => Chip(label: Text(item.title)))
-          .toList(),
+    final refresh = Provider.of<Controller>(context, listen: false).refresh;
+    return GestureDetector(
+      onVerticalDragEnd: (x) => refresh(),
+      child: Wrap(
+        spacing: 20.0,
+        children: context
+            .watch<Controller>()
+            .items
+            .map((item) => Chip(label: Text(item.title)))
+            .toList(),
+      ),
     );
   }
 }
