@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
+import 'package:ppp/services/login.dart';
 import 'package:provider/provider.dart';
 
 import 'status_tile.dart';
@@ -29,6 +30,13 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final gl = GoogleLogin();
+          final r = await gl.login();
+          print(r);
+        },
       ),
     );
   }
