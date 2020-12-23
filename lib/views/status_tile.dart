@@ -1,3 +1,5 @@
+import 'dart:developer' as d;
+
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,7 @@ class StatusTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    d.log("Building $source", name: "StatusTile");
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(8.0),

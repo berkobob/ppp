@@ -1,3 +1,5 @@
+import 'dart:developer' as d;
+
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +7,7 @@ import 'package:provider/provider.dart';
 class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    d.log("Building", name: "Items");
     final refresh = Provider.of<Controller>(context, listen: false).refresh;
     return RefreshIndicator(
       onRefresh: () async => await refresh(),

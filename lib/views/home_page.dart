@@ -1,3 +1,4 @@
+import 'dart:developer' as d;
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'items.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    d.log("Building", name: "HomePage");
     return Scaffold(
       appBar: AppBar(
         title: Text('PPP'),
