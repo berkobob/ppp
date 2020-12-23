@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
 import 'package:provider/provider.dart';
 
+import 'item_card.dart';
+
 class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class Items extends StatelessWidget {
         children: context
             .watch<Controller>()
             .items
-            .map((item) => Chip(label: Text(item.title)))
+            .map((item) => ItemCard(item))
             .toList(),
       ),
     );
