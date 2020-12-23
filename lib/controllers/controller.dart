@@ -21,7 +21,10 @@ class Controller extends ChangeNotifier {
     return _items;
   }
 
-  refresh() => sources.forEach((key, source) => source.getItems(""));
+  Future refresh() async {
+    print('The refresh function in the controller has been called');
+    sources.forEach((key, source) async => await source.getItems(""));
+  }
 
   Controller() {
     sources.forEach((_, value) => value.notifyListeners = notifyListeners);

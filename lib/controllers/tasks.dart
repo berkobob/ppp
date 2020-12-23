@@ -24,6 +24,6 @@ class Tasks extends Base {
     if (status != Service.access) return;
     updateStatus(Service.busy);
     items = (await google.getTasks(taskList: list)).cast<Item>();
-    updateStatus(Service.idle);
+    updateStatus(Service.access);
   }
 }

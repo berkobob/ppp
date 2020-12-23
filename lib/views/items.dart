@@ -6,8 +6,8 @@ class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final refresh = Provider.of<Controller>(context, listen: false).refresh;
-    return GestureDetector(
-      onVerticalDragEnd: (x) => refresh(),
+    return RefreshIndicator(
+      onRefresh: () async => await refresh(),
       child: Wrap(
         spacing: 20.0,
         children: context

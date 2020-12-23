@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  aad_oauth: ^0.2.0
   cupertino_icons: ^1.0.0
   google_sign_in: ^4.5.6
+  html: ^0.14.0+4
   http: ^0.12.2
   provider: ^4.3.2+3
 

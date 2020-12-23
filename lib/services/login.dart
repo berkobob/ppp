@@ -5,7 +5,6 @@ class GoogleLogin {
       GoogleSignIn(scopes: ['https://www.googleapis.com/auth/tasks']);
 
   String _token;
-  //'ya29.a0AfH6SMBjztllKaLN9QJfPbxEcpQZIl7BxeIODabzqYeRQIUrZ_d3c0zNsetT96UTwEUZ3_HTTwwFSZlyCSTcKBeQeoT2nRtz6pHJC1yj_GxKWV7JObeK6Zm4Z2JxpAFFJSjknZzElCmOzqVMYmozCfMQ9bL6OIN_-wtASMUb8WE';
 
   Future<String> get token async {
     if (_token == null) return await refreshToken();
