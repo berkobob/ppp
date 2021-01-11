@@ -1,4 +1,4 @@
-import 'package:ppp/services/microsoft.dart';
+import 'package:ppp/services/dummy_microsoft.dart';
 
 import 'base.dart';
 
@@ -25,7 +25,6 @@ class OneNotes extends Base {
 
     items = await microsoft.getContent(page);
 
-    // items = [Item(source: Source.tasks, title: "I'm a OneNote", id: '321')];
     updateStatus(Service.access);
   }
 }

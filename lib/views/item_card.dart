@@ -1,7 +1,9 @@
 import 'dart:developer' as d;
 
 import 'package:flutter/material.dart';
+import 'package:ppp/controllers/controller.dart';
 import 'package:ppp/models/item.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final Item item;
@@ -17,7 +19,10 @@ class ItemCard extends StatelessWidget {
         return true;
       },
       onAccept: (data) {
-        d.log('Accepting $data of type ${data.runtimeType}');
+        String x = '$item is accepting $data of type ${data.runtimeType}';
+        d.log(x, name: 'onAccept');
+        Provider.of<Controller>(context, listen: false)
+            .add(Item(id: '0', source: Source.block, title: x));
       },
       builder: (context, incoming, rejected) {
         return Draggable(

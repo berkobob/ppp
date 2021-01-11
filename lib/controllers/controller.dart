@@ -12,13 +12,21 @@ class Controller extends ChangeNotifier {
     "OneNotes": OneNotes()
   };
 
+  List<Item> blocks = [];
+
   List<Item> _items = [];
   List<Item> get items {
     _items = [];
-    sources.forEach((name, source) {
+    sources.forEach((_, source) {
       if (source != null && source.items != null) _items += source.items;
     });
+    _items += blocks;
     return _items;
+  }
+
+  void add(Item item) {
+    blocks.add(item);
+    notifyListeners();
   }
 
   Future refresh() async {
@@ -27,8 +35,8 @@ class Controller extends ChangeNotifier {
   }
 
   Controller() {
-    sources.forEach((_, value) => value.notifyListeners = notifyListeners);
-    sources.forEach((_, value) => value.hasAccess());
+    sources.forEach((_, source) => source.notifyListeners = notifyListeners);
+    sources.forEach((_, source) => source.hasAccess());
   }
 
   @override

@@ -14,7 +14,7 @@ class Items extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async => await refresh(),
       child: Wrap(
-        spacing: 20.0,
+        spacing: 50.0,
         children: context
             .watch<Controller>()
             .items

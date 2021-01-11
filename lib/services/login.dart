@@ -7,7 +7,7 @@ class GoogleLogin {
   String _token;
 
   Future<String> get token async {
-    if (_token == null) return await refreshToken();
+    if (_token == null) return await login();
     return _token;
   }
 
@@ -18,7 +18,6 @@ class GoogleLogin {
         await googleSignInAccount.authentication;
 
     _token = googleSignInAuthentication.accessToken;
-    print('token: $_token');
     return _token;
   }
 

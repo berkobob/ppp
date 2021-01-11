@@ -16,3 +16,8 @@ Add the following key/value pair to your Info.plist
 > 
 > `<string>INSERT_REASON_HERE</string>`
 > 
+
+## To be done
+TODO Get the login screens not to overlap each other
+TODO Maybe click on each status tile to login
+TODO Store the token?

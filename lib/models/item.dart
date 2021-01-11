@@ -1,4 +1,4 @@
-enum Source { reminders, tasks, onenotes }
+enum Source { reminders, tasks, onenotes, block }
 
 class Item {
   Source source;
