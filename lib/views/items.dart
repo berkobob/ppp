@@ -2,25 +2,52 @@ import 'dart:developer' as d;
 
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
+import 'package:ppp/models/item.dart';
 import 'package:provider/provider.dart';
 
-import 'item_card.dart';
+final sources = {
+  Source.reminders: CircleAvatar(
+    radius: 10.0,
+    backgroundImage: AssetImage('assets/images/apple.png'),
+    backgroundColor: Color(0xfafafa),
+  ),
+  Source.tasks: CircleAvatar(
+    radius: 8.0,
+    backgroundImage: AssetImage('assets/images/google.png'),
+    backgroundColor: Color(0xfafafa),
+  ),
+  Source.onenotes: CircleAvatar(
+    radius: 10.0,
+    backgroundImage: AssetImage('assets/images/microsoft.png'),
+    backgroundColor: Color(0xfafafa),
+  ),
+};
 
 class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     d.log("Building", name: "Items");
-    final refresh = Provider.of<Controller>(context, listen: false).refresh;
-    return RefreshIndicator(
-      onRefresh: () async => await refresh(),
-      child: Wrap(
-        spacing: 50.0,
-        children: context
-            .watch<Controller>()
-            .items
-            .map((item) => ItemCard(item))
-            .toList(),
-      ),
-    );
+    return ListView.builder(
+        itemCount: context.watch<Controller>().items.length,
+        itemBuilder: (context, index) {
+          final item = context.watch<Controller>().items[index];
+          return Dismissible(
+            key: Key(item.id),
+            onDismissed: (direction) {
+              print(direction);
+            },
+            confirmDismiss: (direction) {
+              if (direction == DismissDirection.endToStart)
+                return Future.value(true);
+              return Future.value(false);
+            },
+            child: ListTile(
+              leading: sources[item.source],
+              title: Text(item.title),
+              subtitle: item.hasNotes ? Text(item.notes) : null,
+              trailing: Icon(Icons.delete),
+            ),
+          );
+        });
   }
 }

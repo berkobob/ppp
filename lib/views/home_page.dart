@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                       .map((source) => StatusTile(source))
                       .toList()),
             ),
-            Items(),
+            Expanded(child: Items()),
           ],
         ),
       ),
