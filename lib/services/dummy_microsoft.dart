@@ -25,11 +25,11 @@ class Microsoft {
 
   Future<List> getContent(Page page) async {
     List<OneNote> items = [];
-    items.add(OneNote(title: 'Develop trade log PLEASE', page: page));
-    items.add(OneNote(title: 'this is the second note', page: page));
-    items.add(OneNote(title: 'Try a bv app', page: page));
-    items.add(OneNote(title: 'The penultimate note', page: page));
-    items.add(OneNote(title: 'Here lies the final note', page: page));
+    items.add(OneNote(title: 'Develop trade log PLEASE', id: 'id'));
+    items.add(OneNote(title: 'this is the second note', id: 'id'));
+    items.add(OneNote(title: 'Try a bv app', id: 'id'));
+    items.add(OneNote(title: 'The penultimate note', id: 'id'));
+    items.add(OneNote(title: 'Here lies the final note', id: 'id'));
     return Future.delayed(Duration(seconds: 2), () => items);
   }
 }

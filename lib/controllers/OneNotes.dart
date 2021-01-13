@@ -1,4 +1,5 @@
-import 'package:ppp/services/dummy_microsoft.dart';
+import 'package:ppp/models/item.dart';
+import 'package:ppp/services/microsoft.dart';
 
 import 'base.dart';
 
@@ -26,5 +27,9 @@ class OneNotes extends Base {
     items = await microsoft.getContent(page);
 
     updateStatus(Service.access);
+  }
+
+  Future<bool> delete(Item item) async {
+    return await microsoft.done(item);
   }
 }

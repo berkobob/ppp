@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer' as d;
 
 import 'package:http/http.dart' as http;
+import 'package:ppp/models/item.dart';
 import 'package:ppp/models/task.dart';
 import 'package:ppp/models/task_list.dart';
 import 'package:ppp/services/login.dart';
@@ -38,12 +40,20 @@ class Google {
     return tasks.map((task) => Task(task)).toList();
   }
 
-  Future insertTask({TaskList taskList, Task task}) async {
+  Future<bool> insertTask({TaskList taskList, Item task}) async {
     final url = rootUrl + 'lists/' + taskList.id + '/tasks';
     final body = task.toJson();
-    print(body);
+    d.log('Inserting $body via $url', name: 'Google Service');
     final response = await http.post(url, headers: await header, body: body);
-    if (response.statusCode != 200) print(response.statusCode);
-    print(response.reasonPhrase);
+    d.log('Status: ${response.reasonPhrase}', name: 'Google Service');
+    return response.statusCode == 200;
+  }
+
+  Future<bool> deleteTask({TaskList list, Item task}) async {
+    final url = rootUrl + 'lists/' + list.id + '/tasks/' + task.id;
+    d.log('Deleteing $task from $list using $url');
+    final response = await http.delete(url, headers: await header);
+    d.log('Status: ${response.reasonPhrase}', name: 'Google Service');
+    return response.statusCode > 199 && response.statusCode < 300;
   }
 }

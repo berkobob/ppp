@@ -11,8 +11,11 @@ import 'package:ppp/services/azure.dart';
 class Microsoft {
   final azure = Azure();
   final String url = 'https://graph.microsoft.com/v1.0/me/onenote/';
-  Future<Map<String, String>> get header async =>
-      {'Authorization': 'Bearer ' + await azure.token};
+  Future<Map<String, String>> get header async => {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        'Authorization': 'Bearer ' + await azure.token
+      };
 
   Future<String> isConnected() async {
     final endpoint = 'https://graph.microsoft.com/v1.0/me/';
@@ -61,18 +64,32 @@ class Microsoft {
 
   Future<List<dynamic>> getContent(Page page) async {
     List<OneNote> items = [];
-    final response = await http.get(page.url, headers: await header);
+    final url = page.url + '?includeIDs=true';
+    final response = await http.get(url, headers: await header);
     final document = parse(response.body);
     final ps = document.getElementsByTagName('p');
     ps.forEach((p) {
       p.attributes.forEach((x, y) {
-        if (x == 'data-tag') {
-          if (y.contains('to-do')) {
-            items.add(OneNote(title: p.text, page: page));
-          }
+        if (y.contains('to-do')) {
+          items.add(OneNote(
+              title: p.text, id: p.id, url: page.url, html: p.outerHtml));
         }
       });
     });
     return items;
+  }
+
+  Future<bool> done(OneNote item) async {
+    print(item.url);
+    final body = jsonEncode(
+        {"target": item.id, "action": "replace", "content": item.html});
+    print(body);
+    print(body.runtimeType);
+    final response =
+        await http.patch(item.url, headers: await header, body: body);
+    print(response.statusCode);
+    print(response.reasonPhrase);
+    return true;
+    // "<p data-tag='to-do:completed' data-id='${item.id}'>${item.title}</p>"
   }
 }

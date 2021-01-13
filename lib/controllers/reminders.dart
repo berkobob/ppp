@@ -1,4 +1,7 @@
+import 'dart:developer' as d;
+
 import 'package:flutter/services.dart';
+import 'package:ppp/models/item.dart';
 import 'package:ppp/models/reminder.dart';
 
 import 'base.dart';
@@ -40,5 +43,11 @@ class Reminders extends Base {
 
   Future deleteReminderWithId(String reminder) async {
     await _channel.invokeMethod("deleteReminderWithId", {"reminder": reminder});
+  }
+
+  Future<bool> delete(Item item) async {
+    d.log('Deleting $item from ${item.source}');
+    await _channel.invokeMethod("deleteReminderWithId", {"reminder": item.id});
+    return true;
   }
 }

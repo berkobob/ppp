@@ -1,10 +1,9 @@
 import 'package:ppp/models/item.dart';
 
-import 'page.dart';
-
 class OneNote extends Item {
-  Page page;
+  String url;
+  String html;
 
-  OneNote({title, this.page})
-      : super(source: Source.onenotes, id: page.url, title: title, notes: null);
+  OneNote({title, id, this.url, this.html})
+      : super(source: Source.onenotes, id: id, title: title, notes: null);
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 enum Source { reminders, tasks, onenotes, block }
 
 class Item {
@@ -8,11 +10,14 @@ class Item {
   bool hasNotes;
 
   Item({this.source, this.id, this.title, this.notes}) {
-    hasNotes = this.notes != null;
+    hasNotes = notes != null && notes != '';
   }
+
+  String toJson() =>
+      json.encode({'title': title, 'notes': hasNotes ? notes : ""});
 
   @override
   String toString() {
-    return '$source: ${this.title}';
+    return '$source\t$id\t$title\t$hasNotes\t$notes';
   }
 }

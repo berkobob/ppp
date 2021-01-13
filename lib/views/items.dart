@@ -33,13 +33,12 @@ class Items extends StatelessWidget {
           final item = context.watch<Controller>().items[index];
           return Dismissible(
             key: Key(item.id),
-            onDismissed: (direction) {
-              print(direction);
-            },
-            confirmDismiss: (direction) {
-              if (direction == DismissDirection.endToStart)
-                return Future.value(true);
-              return Future.value(false);
+            confirmDismiss: (direction) async {
+              bool result = true;
+              direction == DismissDirection.endToStart
+                  ? context.read<Controller>().remove(item)
+                  : result = await context.read<Controller>().add(item);
+              return result;
             },
             child: ListTile(
               leading: sources[item.source],

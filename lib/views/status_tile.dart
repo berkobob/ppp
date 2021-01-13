@@ -2,11 +2,18 @@ import 'dart:developer' as d;
 
 import 'package:flutter/material.dart';
 import 'package:ppp/controllers/controller.dart';
+import 'package:ppp/models/item.dart';
 import 'package:provider/provider.dart';
 
 class StatusTile extends StatelessWidget {
-  final String source;
+  final Source source;
   StatusTile(this.source);
+
+  final sources = {
+    Source.reminders: "Reminders",
+    Source.tasks: "Tasks",
+    Source.onenotes: "OneNotes"
+  };
 
   final statusColors = [
     Colors.blue, // idle
@@ -23,7 +30,7 @@ class StatusTile extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         alignment: Alignment.center,
         child: Text(
-          source,
+          sources[source],
           style: TextStyle(
             color: Colors.white,
           ),

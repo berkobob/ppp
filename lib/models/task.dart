@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'item.dart';
 
 class Task extends Item {
@@ -12,15 +10,5 @@ class Task extends Item {
             title: json['title'],
             notes: json.containsKey('notes') ? json['notes'] : null) {
     due = json['due'];
-  }
-
-  Task.insert({title});
-
-  String toJson() => json.encode({'title': title});
-
-  @override
-  String toString() {
-    if (hasNotes) return title + ':  ' + notes;
-    return title;
   }
 }

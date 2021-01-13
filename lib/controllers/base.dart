@@ -13,6 +13,7 @@ abstract class Base {
   Function notifyListeners;
   List<Item> items;
   Future getItems([String list]);
+  Future<bool> delete(Item item);
 
   updateStatus(Service status) {
     this.status = status;
