@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as d;
 
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
@@ -69,27 +70,30 @@ class Microsoft {
     final document = parse(response.body);
     final ps = document.getElementsByTagName('p');
     ps.forEach((p) {
-      p.attributes.forEach((x, y) {
-        if (y.contains('to-do')) {
-          items.add(OneNote(
-              title: p.text, id: p.id, url: page.url, html: p.outerHtml));
-        }
-      });
+      if (p.attributes.containsKey('data-tag')) if (p.attributes['data-tag'] ==
+              'to-do' ||
+          p.attributes['data-tag'].contains('to-do,'))
+        // p.attributes.forEach((x, y) {
+        //   if (y.contains('to-do')) {
+        items.add(
+            OneNote(title: p.text, id: p.id, url: page.url, html: p.outerHtml));
+      // }
+      // });
     });
     return items;
   }
 
   Future<bool> done(OneNote item) async {
-    print(item.url);
-    final body = jsonEncode(
-        {"target": item.id, "action": "replace", "content": item.html});
-    print(body);
-    print(body.runtimeType);
+    final content = item.html.replaceAll('to-do', 'to-do:completed');
+    final finalContent =
+        content.replaceAll(item.title, '<strike>${item.title}</strike');
+    d.log('New onenote: $finalContent');
+    final body = jsonEncode([
+      {"target": item.id, "action": "replace", "content": finalContent}
+    ]);
     final response =
         await http.patch(item.url, headers: await header, body: body);
     print(response.statusCode);
-    print(response.reasonPhrase);
-    return true;
-    // "<p data-tag='to-do:completed' data-id='${item.id}'>${item.title}</p>"
+    return response.statusCode == 204;
   }
 }

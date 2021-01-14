@@ -14,7 +14,7 @@ class Azure {
     final Config config = Config(
       clientId: '130175b0-9081-4887-8422-cb7495ff8dc4',
       tenant: 'common',
-      scope: 'Notes.Read User.Read offline_access',
+      scope: 'Notes.ReadWrite User.Read offline_access',
       redirectUri: 'https://login.live.com/oauth20_desktop.srf',
     );
     oauth = AadOAuth(config);
