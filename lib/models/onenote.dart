@@ -6,4 +6,9 @@ class OneNote extends Item {
 
   OneNote({title, id, this.url, this.html})
       : super(source: Source.onenotes, id: id, title: title, notes: null);
+
+  @override
+  String toString() {
+    return title;
+  }
 }

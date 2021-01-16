@@ -3,6 +3,7 @@ import 'dart:developer' as d;
 
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:ppp/models/notebook.dart';
 import 'package:ppp/models/onenote.dart';
 import 'package:ppp/models/page.dart';
@@ -33,7 +34,6 @@ class Microsoft {
     try {
       final response = await http.get(endpoint, headers: await header);
       if (response.statusCode != 200) {
-        print("Status code: ${response.statusCode}: ${response.reasonPhrase}");
         return [];
       }
       final json = jsonDecode(response.body)['value'];
@@ -58,9 +58,17 @@ class Microsoft {
 
   Future<List<dynamic>> getPages(Section section) async {
     final endpoint = url + 'sections/${section.id}/pages';
-    final response = await http.get(endpoint, headers: await header);
-    final json = jsonDecode(response.body)['value'];
-    return json.map((page) => Page(page)).toList();
+    Response response;
+    try {
+      response = await http.get(endpoint, headers: await header);
+    } catch (e) {
+      print(e);
+    }
+    final json = jsonDecode(response.body);
+    if (json.containsKey('value'))
+      return json['value'].map((page) => Page(page)).toList();
+    else
+      return [];
   }
 
   Future<List<dynamic>> getContent(Page page) async {
@@ -73,12 +81,8 @@ class Microsoft {
       if (p.attributes.containsKey('data-tag')) if (p.attributes['data-tag'] ==
               'to-do' ||
           p.attributes['data-tag'].contains('to-do,'))
-        // p.attributes.forEach((x, y) {
-        //   if (y.contains('to-do')) {
         items.add(
             OneNote(title: p.text, id: p.id, url: page.url, html: p.outerHtml));
-      // }
-      // });
     });
     return items;
   }

@@ -1,3 +1,4 @@
+import 'package:ppp/models/item.dart';
 import 'package:ppp/models/onenote.dart';
 import 'package:ppp/models/page.dart';
 import 'package:ppp/models/section.dart';
@@ -5,6 +6,10 @@ import 'package:ppp/models/section.dart';
 class Microsoft {
   Future<String> isConnected() async {
     return Future.delayed(Duration(seconds: 3), () => 'Hi');
+  }
+
+  Future<bool> done(Item item) async {
+    return Future.delayed(Duration(seconds: 1), () => true);
   }
 
   Future<List> getSections() async {

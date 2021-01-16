@@ -38,10 +38,10 @@ class Controller extends ChangeNotifier {
     return true;
   }
 
-  Future<bool> remove(Item item) {
+  bool remove(Item item) {
     d.log('Dismissing: ${item.title}', name: (this).toString());
     sources[item.source].items.remove(item);
-    return Future.value(true);
+    return true;
   }
 
   @override

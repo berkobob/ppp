@@ -11,8 +11,8 @@ abstract class Base {
   Service status = Service.idle;
   Future hasAccess();
   Function notifyListeners;
-  List<Item> items;
-  Future getItems([String list]);
+  List<Item> items = [];
+  Future getItems();
   Future<bool> delete(Item item);
 
   updateStatus(Service status) {

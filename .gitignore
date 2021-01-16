@@ -35,7 +35,7 @@ ios/build/
 
 # Web related
 lib/generated_plugin_registrant.dart
-
+ios/Runner/GoogleService-Info.plist
 # Symbolication related
 app.*.symbols
 

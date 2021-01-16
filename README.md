@@ -18,6 +18,5 @@ Add the following key/value pair to your Info.plist
 > 
 
 ## To be done
-TODO Get the login screens not to overlap each other
-TODO Maybe click on each status tile to login
-TODO Store the token?
+TODO Look into a refresh option
+TODO Tasks - capture list only, onenote - all pages, reminders - reminders and capture only

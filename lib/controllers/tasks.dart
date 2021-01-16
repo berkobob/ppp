@@ -2,7 +2,7 @@ import 'dart:developer' as d;
 
 import 'package:ppp/models/item.dart';
 import 'package:ppp/models/task_list.dart';
-import 'package:ppp/services/google.dart';
+import 'package:ppp/services/dummy_google.dart';
 
 import 'base.dart';
 
@@ -24,7 +24,7 @@ class Tasks extends Base {
     await getItems();
   }
 
-  Future getItems([String l]) async {
+  Future getItems() async {
     if (status != Service.access) return;
     updateStatus(Service.busy);
     items = (await google.getTasks(taskList: captureList)).cast<Item>();
