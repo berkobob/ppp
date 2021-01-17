@@ -27,7 +27,15 @@ class HomePage extends StatelessWidget {
                       .map((source) => StatusTile(source))
                       .toList()),
             ),
-            Expanded(child: Items()),
+            Expanded(
+              child: Builder(
+                builder: (context) => RefreshIndicator(
+                    onRefresh: () async =>
+                        Provider.of<Controller>(context, listen: false)
+                            .refresh(),
+                    child: Items()),
+              ),
+            ),
           ],
         ),
       ),

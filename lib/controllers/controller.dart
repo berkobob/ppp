@@ -19,6 +19,13 @@ class Controller extends ChangeNotifier {
     sources.forEach((_, source) => source.hasAccess());
   }
 
+  refresh() {
+    sources.forEach((_, source) {
+      source.items = [];
+      source.getItems();
+    });
+  }
+
   List<Item> get items {
     List<Item> _items = [];
     sources.forEach((_, source) {

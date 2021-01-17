@@ -34,33 +34,6 @@ class OneNotes extends Base {
     updateStatus(Service.access);
   }
 
-  // Future getItems() async {
-  //   updateStatus(Service.busy);
-
-  //   final sections = await microsoft.getSections();
-  //   final pages =
-  //       Future.wait(sections.map((section) => microsoft.getPages(section)));
-  //   pages.((page) => microsoft.getContent(page));
-  //   print(x);
-  //   updateStatus(Service.access);
-  // }
-
-  Future getItemsOld() async {
-    if (status != Service.access) return;
-    updateStatus(Service.busy);
-
-    final sections = await microsoft.getSections();
-    final section = sections
-        .firstWhere((section) => section.displayName == 'Unfiled Notes');
-
-    final pages = await microsoft.getPages(section);
-    final page = pages.firstWhere((page) => page.title == 'ANTOINE');
-
-    items = await microsoft.getContent(page);
-
-    updateStatus(Service.access);
-  }
-
   Future<bool> delete(Item item) async {
     return await microsoft.done(item);
   }
