@@ -34,15 +34,15 @@ class Controller extends ChangeNotifier {
     return _items;
   }
 
-  Future<bool> add(Item item) async {
+  add(Item item) async {
     d.log('Lets: ${item.title}', name: (this).toString());
     Tasks tasks = sources[Source.tasks];
-    if (await tasks.add(item)) {
-      sources[item.source].delete(item);
-      sources[item.source].items.remove(item);
-    } else
-      return false;
-    return true;
+    if (await tasks.add(item)) delete(item);
+  }
+
+  delete(Item item) {
+    sources[item.source].delete(item);
+    sources[item.source].items.remove(item);
   }
 
   bool remove(Item item) {

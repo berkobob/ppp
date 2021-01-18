@@ -49,11 +49,10 @@ class Google {
     return response.statusCode == 200;
   }
 
-  Future<bool> deleteTask({TaskList list, Item task}) async {
+  Future deleteTask({TaskList list, Item task}) async {
     final url = rootUrl + 'lists/' + list.id + '/tasks/' + task.id;
     d.log('Deleteing $task from $list using $url');
     final response = await http.delete(url, headers: await header);
     d.log('Status: ${response.reasonPhrase}', name: 'Google Service');
-    return response.statusCode > 199 && response.statusCode < 300;
   }
 }

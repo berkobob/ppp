@@ -31,20 +31,39 @@ class Items extends StatelessWidget {
         itemCount: context.watch<Controller>().items.length,
         itemBuilder: (context, index) {
           final item = context.watch<Controller>().items[index];
+          Controller controller = context.read<Controller>();
           return Dismissible(
             key: Key(item.id),
-            confirmDismiss: (direction) async {
-              bool result = true;
-              direction == DismissDirection.endToStart
-                  ? context.read<Controller>().remove(item)
-                  : result = await context.read<Controller>().add(item);
-              return result;
-            },
+            confirmDismiss: (direction) =>
+                direction == DismissDirection.endToStart
+                    ? context.read<Controller>().remove(item)
+                    : context.read<Controller>().add(item),
             child: ListTile(
               leading: sources[item.source],
               title: Text(item.title),
               subtitle: item.hasNotes ? Text(item.notes) : null,
-              trailing: Icon(Icons.delete),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Confirm'),
+                    actions: [
+                      FlatButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Cancel'),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          controller.delete(item);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Confirm'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           );
         });
