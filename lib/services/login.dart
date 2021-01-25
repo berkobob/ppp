@@ -9,7 +9,7 @@ class GoogleLogin {
   String _token;
 
   Future<String> get token async {
-    if (_token == null) return await login();
+    if (_token == null) return await refreshToken();
     return _token;
   }
 

@@ -20,12 +20,11 @@ class Tasks extends Base {
       captureList = lists.firstWhere((list) => list.title == 'Capture');
       myTasks = lists.firstWhere((list) => list.title == 'My Tasks');
       updateStatus(Service.access);
+      await getItems();
     }
-    await getItems();
   }
 
   Future getItems() async {
-    if (status != Service.access) return;
     updateStatus(Service.busy);
     final xitems = (await google.getTasks(taskList: captureList));
     items = xitems.cast<Item>();

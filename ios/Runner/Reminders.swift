@@ -38,7 +38,7 @@ class AppleReminders {
                                        "startDate": AppleReminders.dateToString($0.startDateComponents),
                                        "completionDate": $0.completionDate?.description ?? "",
                                        "id": $0.calendarItemIdentifier,
-                                       "notes": "\($0.notes ?? "")  \($0.url?.absoluteString ?? "")"
+                                       "notes": "\($0.notes ?? "")  \($0.url?.absoluteString ?? "") \($0.url?.description ?? "")"
                                        ]})
             }
         }

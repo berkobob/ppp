@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     d.log("Building", name: "HomePage");
     return Scaffold(
       appBar: AppBar(
-        title: Text('PPP'),
+        title: Text('PPP v1.3.0'),
       ),
       body: ChangeNotifierProvider<Controller>(
         create: (_) => Controller(),
