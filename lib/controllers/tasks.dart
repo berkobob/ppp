@@ -27,7 +27,8 @@ class Tasks extends Base {
   Future getItems() async {
     if (status != Service.access) return;
     updateStatus(Service.busy);
-    items = (await google.getTasks(taskList: captureList)).cast<Item>();
+    final xitems = (await google.getTasks(taskList: captureList));
+    items = xitems.cast<Item>();
     updateStatus(Service.access);
   }
 

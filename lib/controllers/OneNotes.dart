@@ -35,6 +35,9 @@ class OneNotes extends Base {
   }
 
   Future<bool> delete(Item item) async {
-    return await microsoft.done(item);
+    updateStatus(Service.busy);
+    final result = await microsoft.done(item);
+    updateStatus(Service.access);
+    return result;
   }
 }

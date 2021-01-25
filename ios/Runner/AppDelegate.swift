@@ -40,6 +40,7 @@ import Flutter
             if let args = call.arguments as? [String: String] {
                 if let id = args["reminder"] {
                     reminders.deleteReminder(id)
+                    result(true)
                 }
             }
             

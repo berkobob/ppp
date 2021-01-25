@@ -26,7 +26,6 @@ class Reminders extends Base {
   }
 
   Future getItems() async {
-    if (status != Service.access) return;
     updateStatus(Service.busy);
     try {
       final reminders = await _channel
@@ -42,12 +41,16 @@ class Reminders extends Base {
   }
 
   Future deleteReminderWithId(String reminder) async {
+    updateStatus(Service.busy);
     await _channel.invokeMethod("deleteReminderWithId", {"reminder": reminder});
+    updateStatus(Service.access);
   }
 
   Future<bool> delete(Item item) async {
+    updateStatus(Service.busy);
     d.log('Deleting $item from ${item.source}');
     await _channel.invokeMethod("deleteReminderWithId", {"reminder": item.id});
+    updateStatus(Service.access);
     return true;
   }
 }

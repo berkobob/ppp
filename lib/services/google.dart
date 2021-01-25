@@ -37,6 +37,7 @@ class Google {
     final response = await http.get(url, headers: await header);
     if (response.statusCode != 200) return null;
     final tasks = jsonDecode(response.body)['items'];
+    if (tasks == null) return [];
     return tasks.map((task) => Task(task)).toList();
   }
 

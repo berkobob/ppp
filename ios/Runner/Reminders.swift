@@ -38,7 +38,7 @@ class AppleReminders {
                                        "startDate": AppleReminders.dateToString($0.startDateComponents),
                                        "completionDate": $0.completionDate?.description ?? "",
                                        "id": $0.calendarItemIdentifier,
-                                       "notes": $0.notes ?? ""
+                                       "notes": "\($0.notes ?? "")  \($0.url?.absoluteString ?? "")"
                                        ]})
             }
         }
@@ -49,13 +49,6 @@ class AppleReminders {
             try? eventStore.remove(reminder, commit: true)
         }
     }
-
-    // func getReminder(_ id: String) -> EKReminder {
-    //     if let reminder: EKReminder = eventStore.calendarItem(withIdentifier: id) {
-    //         return reminder.title
-    //     }
-    //     return nil
-    // }
 
     private func getCalendar(_ title: String) -> [EKCalendar] {
         let calendars = eventStore.calendars(for: EKEntityType.reminder)

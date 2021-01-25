@@ -1,3 +1,5 @@
+import 'dart:developer' as d;
+
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleLogin {
@@ -18,6 +20,7 @@ class GoogleLogin {
         await googleSignInAccount.authentication;
 
     _token = googleSignInAuthentication.accessToken;
+    d.log(_token, name: 'Token');
     return _token;
   }
 
@@ -27,6 +30,7 @@ class GoogleLogin {
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
     _token = googleSignInAuthentication.accessToken;
+    d.log(_token, name: 'Token');
     return _token;
   }
 }
