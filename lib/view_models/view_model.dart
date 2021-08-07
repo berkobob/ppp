@@ -4,12 +4,14 @@ import '../models/item.dart';
 
 import 'apple_view_model.dart';
 import 'base_view_model.dart';
+import 'google_view_model.dart';
 import 'test_view_model.dart';
 
 class ViewModel with ChangeNotifier {
   // final sources = <BaseViewModel>[AppleVM(), TestVM()];
   final sources = <Source, BaseViewModel>{
     Source.Apple: AppleVM(),
+    Source.Google: GoogleVM(),
     Source.Other: TestVM()
   };
   final items = <Item>[];
@@ -22,8 +24,8 @@ class ViewModel with ChangeNotifier {
   Future getItems() async {
     sources.values.forEach((source) async {
       items.addAll(await source.getItems());
-      print('${source.name} is done');
       notifyListeners();
+      print('${source.name} is done.');
     });
   }
 

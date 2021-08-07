@@ -1,16 +1,36 @@
 # ppp
 
-A new Flutter project.
+An app to import items from Apple Reminders, Google Tasks and Microsoft OneNote. Items can then be grouped together and made into blocks which are then scheduled for completion via Google tasks.
 
-## Getting Started
+## Sources
 
-This project is a starting point for a Flutter application.
+* Reminders from Apple Reminders
+* Tasks from Google Tasks
+* Notes from Microsoft OneNote
+ 
+## iOS integration
 
-A few resources to get you started if this is your first Flutter project:
+Add the following key/value pair to your Info.plist
+>
+> `<key>NSRemindersUsageDescription</key>`
+> 
+> `<string>INSERT_REASON_HERE</string>`
+> 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+>`<key>CFBundleURLTypes</key>`
+>`	<array>`
+>`		<dict>`
+>`			<key>CFBundleTypeRole</key>`
+>`			<string>Editor</string>`
+>`			<key>CFBundleURLSchemes</key>`
+>`			<array>`
+>`				<string>com.googleusercontent.apps.176353477956-bdgb338e3dgvb8umjk53gu4he6akla0d</string>`
+>`			</array>`
+>`		</dict>`
+>`	</array>`
+
+
+## To be done
+TODO Look into a refresh option
+TODO Tasks - capture list only, onenote - all pages, reminders - reminders and capture only

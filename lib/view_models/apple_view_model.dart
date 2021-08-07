@@ -33,7 +33,6 @@ class AppleVM extends BaseViewModel {
   Future deleteItem(Item item) async {
     state = ViewState.busy;
     await service.delete(item);
-    await Future.delayed(Duration(seconds: 3));
     state = ViewState.idle;
   }
 }

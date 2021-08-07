@@ -24,6 +24,17 @@
 	<true/>
 	<key>NSRemindersUsageDescription</key>
 	<string>Reminders are copied into PPP</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.176353477956-bdgb338e3dgvb8umjk53gu4he6akla0d</string>
+			</array>
+		</dict>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

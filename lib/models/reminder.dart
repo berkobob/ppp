@@ -1,7 +1,7 @@
 import 'item.dart';
 
 class Reminder extends Item {
-  static final name = 'Reminders';
+  // static final name = 'Reminders';
   int priority;
   bool isCompleted;
   String? dueDate = "";
