@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(title: const Text('PPP')),
         body: MainScreen(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
