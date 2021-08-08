@@ -21,13 +21,16 @@ class MainScreen extends StatelessWidget {
                 .toList(),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: model.items.length,
-              itemBuilder: (_, index) => ItemWidget(
-                model.items[index],
-                onDelete: model.delete,
-                onDismiss: model.dismiss,
-                onAdd: model.add,
+            child: RefreshIndicator(
+              onRefresh: () => model.getItems(),
+              child: ListView.builder(
+                itemCount: model.items.length,
+                itemBuilder: (_, index) => ItemWidget(
+                  model.items[index],
+                  onDelete: model.delete,
+                  onDismiss: model.dismiss,
+                  onAdd: model.add,
+                ),
               ),
             ),
           )

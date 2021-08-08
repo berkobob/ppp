@@ -49,7 +49,6 @@ class Google {
     final url = Uri.parse(rootUrl + 'lists/' + taskList.id + '/tasks');
     final body = json.encode(item.toJson());
     final headers = await header;
-    print('Body: $body');
     await post(url, headers: headers, body: body);
   }
 
@@ -84,6 +83,5 @@ class Google {
     final GoogleSignInAuthentication? googleSignInAuthentication =
         await googleSignInAccount?.authentication;
     _token = googleSignInAuthentication?.accessToken;
-    print('Token = $_token');
   }
 }

@@ -22,10 +22,10 @@ class ViewModel with ChangeNotifier {
   }
 
   Future getItems() async {
+    items.clear();
     sources.values.forEach((source) async {
       items.addAll(await source.getItems());
       notifyListeners();
-      print('${source.name} is done.');
     });
   }
 
@@ -44,7 +44,6 @@ class ViewModel with ChangeNotifier {
   }
 
   Future<bool> add(Item item) async {
-    print('Time to create a new ${item.title}');
     await sources[Source.Google]!.add(item);
     await delete(item);
     return false;
