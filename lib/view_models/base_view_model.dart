@@ -8,4 +8,8 @@ abstract class BaseViewModel {
   ViewState state = ViewState.idle;
   Future<List<Item>> getItems();
   Future deleteItem(Item item);
+  Future add(Item item) {
+    print('This source does not add');
+    return Future.value();
+  }
 }

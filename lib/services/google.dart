@@ -47,8 +47,10 @@ class Google {
 
   Future add(Item item) async {
     final url = Uri.parse(rootUrl + 'lists/' + taskList.id + '/tasks');
-    final body = item.toJson();
-    await post(url, headers: await header, body: body);
+    final body = json.encode(item.toJson());
+    final headers = await header;
+    print('Body: $body');
+    await post(url, headers: headers, body: body);
   }
 
   // private methods

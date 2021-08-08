@@ -26,6 +26,8 @@ class MainScreen extends StatelessWidget {
               itemBuilder: (_, index) => ItemWidget(
                 model.items[index],
                 onDelete: model.delete,
+                onDismiss: model.dismiss,
+                onAdd: model.add,
               ),
             ),
           )

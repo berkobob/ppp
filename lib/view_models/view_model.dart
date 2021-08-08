@@ -37,6 +37,19 @@ class ViewModel with ChangeNotifier {
     _setState(source, ViewState.idle);
   }
 
+  Future<bool> dismiss(Item item) async {
+    notifyListeners();
+    items.remove(item);
+    return true;
+  }
+
+  Future<bool> add(Item item) async {
+    print('Time to create a new ${item.title}');
+    await sources[Source.Google]!.add(item);
+    await delete(item);
+    return false;
+  }
+
   void _setState(BaseViewModel source, ViewState state) {
     source.state = state;
     notifyListeners();
